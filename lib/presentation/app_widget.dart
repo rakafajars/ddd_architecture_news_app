@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilprate_ddd/injection.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_boilprate_ddd/application/news_article/news_article_bloc.dart';
 import 'home/home_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -18,7 +20,10 @@ class AppWidget extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: BlocProvider(
+        create: (context) => getIt<NewsArticleBloc>(),
+        child: const HomePage(),
+      ),
     );
   }
 }

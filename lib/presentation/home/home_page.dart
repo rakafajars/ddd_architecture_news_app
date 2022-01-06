@@ -1,5 +1,6 @@
-// import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_boilprate_ddd/application/news_article/news_article_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
 
@@ -19,8 +20,20 @@ final List<String> titleNews = [
   'Bitcoin'
 ];
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    BlocProvider.of<NewsArticleBloc>(context)
+        .add(const NewsArticleEvent.getNewsArticle());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,58 +154,75 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     /// Slider
-                    GFCarousel(
-                      autoPlay: true,
-                      aspectRatio: 2,
-                      viewportFraction: 1.0,
-                      items: List.generate(
-                        imgList.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.only(left: 15, right: 15),
-                          child: ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(
-                                  8.0,
-                                ),
-                              ),
-                              child: Stack(
-                                children: <Widget>[
-                                  Image.network(
-                                    imgList[index],
-                                    fit: BoxFit.cover,
-                                    width: 1000.0,
-                                  ),
-                                  Positioned(
-                                    bottom: 0.0,
-                                    left: 0.0,
-                                    right: 0.0,
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            Color.fromARGB(200, 0, 0, 0),
-                                            Color.fromARGB(0, 0, 0, 0)
+                    BlocBuilder<NewsArticleBloc, NewsArticleState>(
+                      builder: (context, state) {
+                        return state.maybeMap(
+                            orElse: () => Container(),
+                            loadInProgress: (_) =>
+                                const CircularProgressIndicator(),
+                            getNewsArticleSuccess: (data) {
+                              var _data = data.response.data?.news;
+
+                              return GFCarousel(
+                                autoPlay: true,
+                                aspectRatio: 2,
+                                viewportFraction: 1.0,
+                                items: List.generate(
+                                  _data?.length ?? 0,
+                                  (index) => Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, right: 15),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(
+                                            8.0,
+                                          ),
+                                        ),
+                                        child: Stack(
+                                          children: <Widget>[
+                                            Image.network(
+                                              _data?[index].img_url ?? "",
+                                              fit: BoxFit.cover,
+                                              width: 1000.0,
+                                            ),
+                                            Positioned(
+                                              bottom: 0.0,
+                                              left: 0.0,
+                                              right: 0.0,
+                                              child: Container(
+                                                decoration: const BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Color.fromARGB(
+                                                          200, 0, 0, 0),
+                                                      Color.fromARGB(0, 0, 0, 0)
+                                                    ],
+                                                    begin:
+                                                        Alignment.bottomCenter,
+                                                    end: Alignment.topCenter,
+                                                  ),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10.0,
+                                                        horizontal: 20.0),
+                                                child: Text(
+                                                  _data?[index].title ?? "",
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ],
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter,
-                                        ),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 20.0),
-                                      child: Text(
-                                        'No. ${imgList.indexOf(imgList[index])} image',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
+                                        )),
                                   ),
-                                ],
-                              )),
-                        ),
-                      ),
+                                ),
+                              );
+                            });
+                      },
                     ),
                     const SizedBox(height: 24),
 
