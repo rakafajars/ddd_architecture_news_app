@@ -47,6 +47,8 @@ dependencies:
   alice: ^0.2.5
   freezed_annotation: ^1.1.0
   get: ^4.6.1
+  getwidget: ^2.0.4
+  connectivity_plus: ^2.2.0
 
 dev_dependencies:
   flutter_test:
