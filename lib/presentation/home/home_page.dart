@@ -1,6 +1,7 @@
 import 'package:flutter_boilprate_ddd/application/news_article/news_article_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilprate_ddd/infrastructure/local_data_source/news_article_category_local.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
 
@@ -11,13 +12,15 @@ final List<String> imgList = [
   "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
 ];
 
-final List<String> titleNews = [
-  'Heahlty',
-  'Technology',
-  'Finance',
-  'Arts',
-  'Sport',
-  'Bitcoin'
+final List<NewsArticleCategoryLocal> titleNews = [
+  const NewsArticleCategoryLocal(id: 'market', name: 'Market'),
+  const NewsArticleCategoryLocal(id: 'investment', name: 'Investment'),
+  const NewsArticleCategoryLocal(id: 'news', name: 'News'),
+  const NewsArticleCategoryLocal(id: 'entrepreneur', name: 'Entrepreneur'),
+  const NewsArticleCategoryLocal(id: 'syariah', name: 'Syariah'),
+  const NewsArticleCategoryLocal(id: 'tech', name: 'Tech'),
+  const NewsArticleCategoryLocal(id: 'lifestyle', name: 'Lifestyle'),
+  const NewsArticleCategoryLocal(id: 'profil', name: 'Profil'),
 ];
 
 class HomePage extends StatefulWidget {
@@ -28,6 +31,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int selectCategoryIndex = 0;
+
   @override
   void initState() {
     BlocProvider.of<NewsArticleBloc>(context)
@@ -238,29 +243,41 @@ class _HomePageState extends State<HomePage> {
                         itemBuilder: (context, int index) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 8),
-                            child: Container(
-                              height: 32,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                  width: 1,
-                                  color: AppColors.colorF0F1FA,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectCategoryIndex = index;
+                                });
+                              },
+                              child: Container(
+                                height: 32,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
                                 ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(
-                                    16,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: index == selectCategoryIndex
+                                      ? AppColors.colorFF3A44
+                                      : Colors.white,
+                                  border: Border.all(
+                                    width: 1,
+                                    color: AppColors.colorF0F1FA,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(
+                                      16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              child: Text(
-                                titleNews[index],
-                                style: AppText.nunitoSemiBold
-                                    .copyWith(color: AppColors.color2E0505),
+                                child: Text(
+                                  titleNews[index].name ?? "-",
+                                  style: AppText.nunitoSemiBold.copyWith(
+                                    color: index == selectCategoryIndex
+                                        ? Colors.white
+                                        : AppColors.color2E0505,
+                                  ),
+                                ),
                               ),
                             ),
                           );
