@@ -12,6 +12,6 @@ class NewsArticleState with _$NewsArticleState {
   ) = _GetNewsArticleSuccess;
 
   const factory NewsArticleState.getNewsArticleByCategorySuccess(
-    NewsArticleResponse response,
+    NewsArticleByCategoryResponse response,
   ) = _GetNewsArticleByCategorySuccess;
 }

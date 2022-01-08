@@ -361,7 +361,7 @@ class _$NewsArticleStateTearOff {
   }
 
   _GetNewsArticleByCategorySuccess getNewsArticleByCategorySuccess(
-      NewsArticleResponse response) {
+      NewsArticleByCategoryResponse response) {
     return _GetNewsArticleByCategorySuccess(
       response,
     );
@@ -380,7 +380,7 @@ mixin _$NewsArticleState {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
-    required TResult Function(NewsArticleResponse response)
+    required TResult Function(NewsArticleByCategoryResponse response)
         getNewsArticleByCategorySuccess,
   }) =>
       throw _privateConstructorUsedError;
@@ -390,7 +390,7 @@ mixin _$NewsArticleState {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
   }) =>
       throw _privateConstructorUsedError;
@@ -400,7 +400,7 @@ mixin _$NewsArticleState {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) =>
@@ -499,7 +499,7 @@ class _$_Initial implements _Initial {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
-    required TResult Function(NewsArticleResponse response)
+    required TResult Function(NewsArticleByCategoryResponse response)
         getNewsArticleByCategorySuccess,
   }) {
     return initial();
@@ -512,7 +512,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
   }) {
     return initial?.call();
@@ -525,7 +525,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
@@ -630,7 +630,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
-    required TResult Function(NewsArticleResponse response)
+    required TResult Function(NewsArticleByCategoryResponse response)
         getNewsArticleByCategorySuccess,
   }) {
     return loadInProgress();
@@ -643,7 +643,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
   }) {
     return loadInProgress?.call();
@@ -656,7 +656,7 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
@@ -794,7 +794,7 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
-    required TResult Function(NewsArticleResponse response)
+    required TResult Function(NewsArticleByCategoryResponse response)
         getNewsArticleByCategorySuccess,
   }) {
     return loadFailure(e);
@@ -807,7 +807,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
   }) {
     return loadFailure?.call(e);
@@ -820,7 +820,7 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
@@ -964,7 +964,7 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
-    required TResult Function(NewsArticleResponse response)
+    required TResult Function(NewsArticleByCategoryResponse response)
         getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleSuccess(response);
@@ -977,7 +977,7 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleSuccess?.call(response);
@@ -990,7 +990,7 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
@@ -1061,9 +1061,7 @@ abstract class _$GetNewsArticleByCategorySuccessCopyWith<$Res> {
           _GetNewsArticleByCategorySuccess value,
           $Res Function(_GetNewsArticleByCategorySuccess) then) =
       __$GetNewsArticleByCategorySuccessCopyWithImpl<$Res>;
-  $Res call({NewsArticleResponse response});
-
-  $NewsArticleResponseCopyWith<$Res> get response;
+  $Res call({NewsArticleByCategoryResponse response});
 }
 
 /// @nodoc
@@ -1087,15 +1085,8 @@ class __$GetNewsArticleByCategorySuccessCopyWithImpl<$Res>
       response == freezed
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as NewsArticleResponse,
+              as NewsArticleByCategoryResponse,
     ));
-  }
-
-  @override
-  $NewsArticleResponseCopyWith<$Res> get response {
-    return $NewsArticleResponseCopyWith<$Res>(_value.response, (value) {
-      return _then(_value.copyWith(response: value));
-    });
   }
 }
 
@@ -1106,7 +1097,7 @@ class _$_GetNewsArticleByCategorySuccess
   const _$_GetNewsArticleByCategorySuccess(this.response);
 
   @override
-  final NewsArticleResponse response;
+  final NewsArticleByCategoryResponse response;
 
   @override
   String toString() {
@@ -1139,7 +1130,7 @@ class _$_GetNewsArticleByCategorySuccess
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
-    required TResult Function(NewsArticleResponse response)
+    required TResult Function(NewsArticleByCategoryResponse response)
         getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleByCategorySuccess(response);
@@ -1152,7 +1143,7 @@ class _$_GetNewsArticleByCategorySuccess
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleByCategorySuccess?.call(response);
@@ -1165,7 +1156,7 @@ class _$_GetNewsArticleByCategorySuccess
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
-    TResult Function(NewsArticleResponse response)?
+    TResult Function(NewsArticleByCategoryResponse response)?
         getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
@@ -1221,10 +1212,11 @@ class _$_GetNewsArticleByCategorySuccess
 }
 
 abstract class _GetNewsArticleByCategorySuccess implements NewsArticleState {
-  const factory _GetNewsArticleByCategorySuccess(NewsArticleResponse response) =
+  const factory _GetNewsArticleByCategorySuccess(
+          NewsArticleByCategoryResponse response) =
       _$_GetNewsArticleByCategorySuccess;
 
-  NewsArticleResponse get response;
+  NewsArticleByCategoryResponse get response;
   @JsonKey(ignore: true)
   _$GetNewsArticleByCategorySuccessCopyWith<_GetNewsArticleByCategorySuccess>
       get copyWith => throw _privateConstructorUsedError;

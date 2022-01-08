@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_boilprate_ddd/domain/news_article/i_news_article_repository.dart';
 import 'package:flutter_boilprate_ddd/domain/news_article/news_article_failure.dart';
+import 'package:flutter_boilprate_ddd/infrastructure/news_article/news_article_by_category_response.dart';
 import 'package:flutter_boilprate_ddd/infrastructure/news_article/news_article_response.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
@@ -17,9 +18,12 @@ class NewsArticleRepository implements INewsArticleRepository {
       final response = await _dio.get(
         'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-articles',
       );
+      print('${response.data}');
 
       return right(NewsArticleResponse.fromJson(response.data));
     } catch (e) {
+      print('${e.toString()}');
+
       return left(
         const NewsArticleFailure.serverFailure(),
       );
@@ -27,7 +31,7 @@ class NewsArticleRepository implements INewsArticleRepository {
   }
 
   @override
-  Future<Either<NewsArticleFailure, NewsArticleResponse>>
+  Future<Either<NewsArticleFailure, NewsArticleByCategoryResponse>>
       getNewsArticleByCategory({
     required String category,
   }) async {
@@ -36,7 +40,7 @@ class NewsArticleRepository implements INewsArticleRepository {
         'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-articles?category=$category',
       );
 
-      return right(NewsArticleResponse.fromJson(response.data));
+      return right(NewsArticleByCategoryResponse.fromJson(response.data));
     } catch (e) {
       return left(
         const NewsArticleFailure.serverFailure(),
