@@ -20,6 +20,13 @@ class _$NewsArticleEventTearOff {
   _GetNewsArticle getNewsArticle() {
     return const _GetNewsArticle();
   }
+
+  _GetNewsArticleByCategory getNewsArticleByCategory(
+      {required String category}) {
+    return _GetNewsArticleByCategory(
+      category: category,
+    );
+  }
 }
 
 /// @nodoc
@@ -30,32 +37,39 @@ mixin _$NewsArticleEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getNewsArticle,
+    required TResult Function(String category) getNewsArticleByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? getNewsArticle,
+    TResult Function(String category)? getNewsArticleByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getNewsArticle,
+    TResult Function(String category)? getNewsArticleByCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNewsArticle value) getNewsArticle,
+    required TResult Function(_GetNewsArticleByCategory value)
+        getNewsArticleByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetNewsArticle value)? getNewsArticle,
+    TResult Function(_GetNewsArticleByCategory value)? getNewsArticleByCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNewsArticle value)? getNewsArticle,
+    TResult Function(_GetNewsArticleByCategory value)? getNewsArticleByCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +134,7 @@ class _$_GetNewsArticle implements _GetNewsArticle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getNewsArticle,
+    required TResult Function(String category) getNewsArticleByCategory,
   }) {
     return getNewsArticle();
   }
@@ -128,6 +143,7 @@ class _$_GetNewsArticle implements _GetNewsArticle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? getNewsArticle,
+    TResult Function(String category)? getNewsArticleByCategory,
   }) {
     return getNewsArticle?.call();
   }
@@ -136,6 +152,7 @@ class _$_GetNewsArticle implements _GetNewsArticle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getNewsArticle,
+    TResult Function(String category)? getNewsArticleByCategory,
     required TResult orElse(),
   }) {
     if (getNewsArticle != null) {
@@ -148,6 +165,8 @@ class _$_GetNewsArticle implements _GetNewsArticle {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNewsArticle value) getNewsArticle,
+    required TResult Function(_GetNewsArticleByCategory value)
+        getNewsArticleByCategory,
   }) {
     return getNewsArticle(this);
   }
@@ -156,6 +175,7 @@ class _$_GetNewsArticle implements _GetNewsArticle {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_GetNewsArticle value)? getNewsArticle,
+    TResult Function(_GetNewsArticleByCategory value)? getNewsArticleByCategory,
   }) {
     return getNewsArticle?.call(this);
   }
@@ -164,6 +184,7 @@ class _$_GetNewsArticle implements _GetNewsArticle {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNewsArticle value)? getNewsArticle,
+    TResult Function(_GetNewsArticleByCategory value)? getNewsArticleByCategory,
     required TResult orElse(),
   }) {
     if (getNewsArticle != null) {
@@ -175,6 +196,144 @@ class _$_GetNewsArticle implements _GetNewsArticle {
 
 abstract class _GetNewsArticle implements NewsArticleEvent {
   const factory _GetNewsArticle() = _$_GetNewsArticle;
+}
+
+/// @nodoc
+abstract class _$GetNewsArticleByCategoryCopyWith<$Res> {
+  factory _$GetNewsArticleByCategoryCopyWith(_GetNewsArticleByCategory value,
+          $Res Function(_GetNewsArticleByCategory) then) =
+      __$GetNewsArticleByCategoryCopyWithImpl<$Res>;
+  $Res call({String category});
+}
+
+/// @nodoc
+class __$GetNewsArticleByCategoryCopyWithImpl<$Res>
+    extends _$NewsArticleEventCopyWithImpl<$Res>
+    implements _$GetNewsArticleByCategoryCopyWith<$Res> {
+  __$GetNewsArticleByCategoryCopyWithImpl(_GetNewsArticleByCategory _value,
+      $Res Function(_GetNewsArticleByCategory) _then)
+      : super(_value, (v) => _then(v as _GetNewsArticleByCategory));
+
+  @override
+  _GetNewsArticleByCategory get _value =>
+      super._value as _GetNewsArticleByCategory;
+
+  @override
+  $Res call({
+    Object? category = freezed,
+  }) {
+    return _then(_GetNewsArticleByCategory(
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetNewsArticleByCategory implements _GetNewsArticleByCategory {
+  const _$_GetNewsArticleByCategory({required this.category});
+
+  @override
+  final String category;
+
+  @override
+  String toString() {
+    return 'NewsArticleEvent.getNewsArticleByCategory(category: $category)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetNewsArticleByCategory &&
+            const DeepCollectionEquality().equals(other.category, category));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(category));
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetNewsArticleByCategoryCopyWith<_GetNewsArticleByCategory> get copyWith =>
+      __$GetNewsArticleByCategoryCopyWithImpl<_GetNewsArticleByCategory>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getNewsArticle,
+    required TResult Function(String category) getNewsArticleByCategory,
+  }) {
+    return getNewsArticleByCategory(category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getNewsArticle,
+    TResult Function(String category)? getNewsArticleByCategory,
+  }) {
+    return getNewsArticleByCategory?.call(category);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getNewsArticle,
+    TResult Function(String category)? getNewsArticleByCategory,
+    required TResult orElse(),
+  }) {
+    if (getNewsArticleByCategory != null) {
+      return getNewsArticleByCategory(category);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetNewsArticle value) getNewsArticle,
+    required TResult Function(_GetNewsArticleByCategory value)
+        getNewsArticleByCategory,
+  }) {
+    return getNewsArticleByCategory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GetNewsArticle value)? getNewsArticle,
+    TResult Function(_GetNewsArticleByCategory value)? getNewsArticleByCategory,
+  }) {
+    return getNewsArticleByCategory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetNewsArticle value)? getNewsArticle,
+    TResult Function(_GetNewsArticleByCategory value)? getNewsArticleByCategory,
+    required TResult orElse(),
+  }) {
+    if (getNewsArticleByCategory != null) {
+      return getNewsArticleByCategory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetNewsArticleByCategory implements NewsArticleEvent {
+  const factory _GetNewsArticleByCategory({required String category}) =
+      _$_GetNewsArticleByCategory;
+
+  String get category;
+  @JsonKey(ignore: true)
+  _$GetNewsArticleByCategoryCopyWith<_GetNewsArticleByCategory> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -200,6 +359,13 @@ class _$NewsArticleStateTearOff {
       response,
     );
   }
+
+  _GetNewsArticleByCategorySuccess getNewsArticleByCategorySuccess(
+      NewsArticleResponse response) {
+    return _GetNewsArticleByCategorySuccess(
+      response,
+    );
+  }
 }
 
 /// @nodoc
@@ -214,6 +380,8 @@ mixin _$NewsArticleState {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleByCategorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -222,6 +390,8 @@ mixin _$NewsArticleState {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -230,6 +400,8 @@ mixin _$NewsArticleState {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -240,6 +412,8 @@ mixin _$NewsArticleState {
     required TResult Function(_LoadFailure value) loadFailure,
     required TResult Function(_GetNewsArticleSuccess value)
         getNewsArticleSuccess,
+    required TResult Function(_GetNewsArticleByCategorySuccess value)
+        getNewsArticleByCategorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -248,6 +422,8 @@ mixin _$NewsArticleState {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -256,6 +432,8 @@ mixin _$NewsArticleState {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -321,6 +499,8 @@ class _$_Initial implements _Initial {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleByCategorySuccess,
   }) {
     return initial();
   }
@@ -332,6 +512,8 @@ class _$_Initial implements _Initial {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
   }) {
     return initial?.call();
   }
@@ -343,6 +525,8 @@ class _$_Initial implements _Initial {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -359,6 +543,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_LoadFailure value) loadFailure,
     required TResult Function(_GetNewsArticleSuccess value)
         getNewsArticleSuccess,
+    required TResult Function(_GetNewsArticleByCategorySuccess value)
+        getNewsArticleByCategorySuccess,
   }) {
     return initial(this);
   }
@@ -370,6 +556,8 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
   }) {
     return initial?.call(this);
   }
@@ -381,6 +569,8 @@ class _$_Initial implements _Initial {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -440,6 +630,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleByCategorySuccess,
   }) {
     return loadInProgress();
   }
@@ -451,6 +643,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
   }) {
     return loadInProgress?.call();
   }
@@ -462,6 +656,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -478,6 +674,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     required TResult Function(_LoadFailure value) loadFailure,
     required TResult Function(_GetNewsArticleSuccess value)
         getNewsArticleSuccess,
+    required TResult Function(_GetNewsArticleByCategorySuccess value)
+        getNewsArticleByCategorySuccess,
   }) {
     return loadInProgress(this);
   }
@@ -489,6 +687,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
   }) {
     return loadInProgress?.call(this);
   }
@@ -500,6 +700,8 @@ class _$_LoadInProgress implements _LoadInProgress {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
@@ -592,6 +794,8 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleByCategorySuccess,
   }) {
     return loadFailure(e);
   }
@@ -603,6 +807,8 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
   }) {
     return loadFailure?.call(e);
   }
@@ -614,6 +820,8 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -630,6 +838,8 @@ class _$_LoadFailure implements _LoadFailure {
     required TResult Function(_LoadFailure value) loadFailure,
     required TResult Function(_GetNewsArticleSuccess value)
         getNewsArticleSuccess,
+    required TResult Function(_GetNewsArticleByCategorySuccess value)
+        getNewsArticleByCategorySuccess,
   }) {
     return loadFailure(this);
   }
@@ -641,6 +851,8 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
   }) {
     return loadFailure?.call(this);
   }
@@ -652,6 +864,8 @@ class _$_LoadFailure implements _LoadFailure {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
@@ -750,6 +964,8 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     required TResult Function(NewsArticleFailure e) loadFailure,
     required TResult Function(NewsArticleResponse response)
         getNewsArticleSuccess,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleSuccess(response);
   }
@@ -761,6 +977,8 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleSuccess?.call(response);
   }
@@ -772,6 +990,8 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     TResult Function()? loadInProgress,
     TResult Function(NewsArticleFailure e)? loadFailure,
     TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (getNewsArticleSuccess != null) {
@@ -788,6 +1008,8 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     required TResult Function(_LoadFailure value) loadFailure,
     required TResult Function(_GetNewsArticleSuccess value)
         getNewsArticleSuccess,
+    required TResult Function(_GetNewsArticleByCategorySuccess value)
+        getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleSuccess(this);
   }
@@ -799,6 +1021,8 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
   }) {
     return getNewsArticleSuccess?.call(this);
   }
@@ -810,6 +1034,8 @@ class _$_GetNewsArticleSuccess implements _GetNewsArticleSuccess {
     TResult Function(_LoadInProgress value)? loadInProgress,
     TResult Function(_LoadFailure value)? loadFailure,
     TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
     required TResult orElse(),
   }) {
     if (getNewsArticleSuccess != null) {
@@ -827,4 +1053,179 @@ abstract class _GetNewsArticleSuccess implements NewsArticleState {
   @JsonKey(ignore: true)
   _$GetNewsArticleSuccessCopyWith<_GetNewsArticleSuccess> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$GetNewsArticleByCategorySuccessCopyWith<$Res> {
+  factory _$GetNewsArticleByCategorySuccessCopyWith(
+          _GetNewsArticleByCategorySuccess value,
+          $Res Function(_GetNewsArticleByCategorySuccess) then) =
+      __$GetNewsArticleByCategorySuccessCopyWithImpl<$Res>;
+  $Res call({NewsArticleResponse response});
+
+  $NewsArticleResponseCopyWith<$Res> get response;
+}
+
+/// @nodoc
+class __$GetNewsArticleByCategorySuccessCopyWithImpl<$Res>
+    extends _$NewsArticleStateCopyWithImpl<$Res>
+    implements _$GetNewsArticleByCategorySuccessCopyWith<$Res> {
+  __$GetNewsArticleByCategorySuccessCopyWithImpl(
+      _GetNewsArticleByCategorySuccess _value,
+      $Res Function(_GetNewsArticleByCategorySuccess) _then)
+      : super(_value, (v) => _then(v as _GetNewsArticleByCategorySuccess));
+
+  @override
+  _GetNewsArticleByCategorySuccess get _value =>
+      super._value as _GetNewsArticleByCategorySuccess;
+
+  @override
+  $Res call({
+    Object? response = freezed,
+  }) {
+    return _then(_GetNewsArticleByCategorySuccess(
+      response == freezed
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as NewsArticleResponse,
+    ));
+  }
+
+  @override
+  $NewsArticleResponseCopyWith<$Res> get response {
+    return $NewsArticleResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_GetNewsArticleByCategorySuccess
+    implements _GetNewsArticleByCategorySuccess {
+  const _$_GetNewsArticleByCategorySuccess(this.response);
+
+  @override
+  final NewsArticleResponse response;
+
+  @override
+  String toString() {
+    return 'NewsArticleState.getNewsArticleByCategorySuccess(response: $response)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetNewsArticleByCategorySuccess &&
+            const DeepCollectionEquality().equals(other.response, response));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetNewsArticleByCategorySuccessCopyWith<_GetNewsArticleByCategorySuccess>
+      get copyWith => __$GetNewsArticleByCategorySuccessCopyWithImpl<
+          _GetNewsArticleByCategorySuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadInProgress,
+    required TResult Function(NewsArticleFailure e) loadFailure,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleSuccess,
+    required TResult Function(NewsArticleResponse response)
+        getNewsArticleByCategorySuccess,
+  }) {
+    return getNewsArticleByCategorySuccess(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(NewsArticleFailure e)? loadFailure,
+    TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
+  }) {
+    return getNewsArticleByCategorySuccess?.call(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadInProgress,
+    TResult Function(NewsArticleFailure e)? loadFailure,
+    TResult Function(NewsArticleResponse response)? getNewsArticleSuccess,
+    TResult Function(NewsArticleResponse response)?
+        getNewsArticleByCategorySuccess,
+    required TResult orElse(),
+  }) {
+    if (getNewsArticleByCategorySuccess != null) {
+      return getNewsArticleByCategorySuccess(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoadInProgress value) loadInProgress,
+    required TResult Function(_LoadFailure value) loadFailure,
+    required TResult Function(_GetNewsArticleSuccess value)
+        getNewsArticleSuccess,
+    required TResult Function(_GetNewsArticleByCategorySuccess value)
+        getNewsArticleByCategorySuccess,
+  }) {
+    return getNewsArticleByCategorySuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_LoadFailure value)? loadFailure,
+    TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
+  }) {
+    return getNewsArticleByCategorySuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoadInProgress value)? loadInProgress,
+    TResult Function(_LoadFailure value)? loadFailure,
+    TResult Function(_GetNewsArticleSuccess value)? getNewsArticleSuccess,
+    TResult Function(_GetNewsArticleByCategorySuccess value)?
+        getNewsArticleByCategorySuccess,
+    required TResult orElse(),
+  }) {
+    if (getNewsArticleByCategorySuccess != null) {
+      return getNewsArticleByCategorySuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetNewsArticleByCategorySuccess implements NewsArticleState {
+  const factory _GetNewsArticleByCategorySuccess(NewsArticleResponse response) =
+      _$_GetNewsArticleByCategorySuccess;
+
+  NewsArticleResponse get response;
+  @JsonKey(ignore: true)
+  _$GetNewsArticleByCategorySuccessCopyWith<_GetNewsArticleByCategorySuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }

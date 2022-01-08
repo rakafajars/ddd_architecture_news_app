@@ -31,6 +31,22 @@ class NewsArticleBloc extends Bloc<NewsArticleEvent, NewsArticleState> {
               ),
             );
           },
+          getNewsArticleByCategory: (request) async {
+            emit(const NewsArticleState.loadInProgress());
+            final getNewsArticleByCategory =
+                await _iNewsArticleRepository.getNewsArticleByCategory(
+              category: request.category,
+            );
+
+            emit(
+              getNewsArticleByCategory.fold(
+                (l) => const NewsArticleState.loadFailure(
+                  NewsArticleFailure.serverFailure(),
+                ),
+                (r) => NewsArticleState.getNewsArticleByCategorySuccess(r),
+              ),
+            );
+          },
         );
       },
     );

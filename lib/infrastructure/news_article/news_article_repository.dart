@@ -25,4 +25,22 @@ class NewsArticleRepository implements INewsArticleRepository {
       );
     }
   }
+
+  @override
+  Future<Either<NewsArticleFailure, NewsArticleResponse>>
+      getNewsArticleByCategory({
+    required String category,
+  }) async {
+    try {
+      final response = await _dio.get(
+        'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-articles?category=$category',
+      );
+
+      return right(NewsArticleResponse.fromJson(response.data));
+    } catch (e) {
+      return left(
+        const NewsArticleFailure.serverFailure(),
+      );
+    }
+  }
 }

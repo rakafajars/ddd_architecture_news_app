@@ -37,6 +37,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     BlocProvider.of<NewsArticleBloc>(context)
         .add(const NewsArticleEvent.getNewsArticle());
+    BlocProvider.of<NewsArticleBloc>(context).add(
+      const NewsArticleEvent.getNewsArticleByCategory(category: 'market'),
+    );
     super.initState();
   }
 
@@ -287,102 +290,125 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 16),
 
                     /// Content TabBar
-                    Column(
-                      children: List.generate(
-                          8,
-                          (index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 128,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      SizedBox(
+                    BlocBuilder<NewsArticleBloc, NewsArticleState>(
+                      builder: (context, state) {
+                        return state.maybeMap(
+                          orElse: () => Container(
+                            child: (Text('gagal')),
+                          ),
+                          loadInProgress: (_) =>
+                              const CircularProgressIndicator(),
+                          getNewsArticleByCategorySuccess: (value) => Column(
+                            children: List.generate(
+                                8,
+                                (index) => Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Container(
                                         width: double.infinity,
                                         height: 128,
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(
-                                              8.0,
-                                            ),
-                                          ),
-                                          child: Image.network(
-                                            'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: double.infinity,
-                                        height: 128,
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 15),
                                         decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(
-                                              8.0,
-                                            ),
-                                          ),
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              const Color(0xFF626262)
-                                                  .withOpacity(0.35),
-                                              const Color.fromARGB(0, 0, 0, 0)
-                                            ],
-                                            begin: Alignment.bottomCenter,
-                                            end: Alignment.topCenter,
-                                          ),
+                                          color: Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                        child: Stack(
                                           children: [
-                                            Text(
-                                              '5 things to know about the "conundrum" of lupus',
-                                              style: AppText.noticaBold
-                                                  .copyWith(
-                                                      fontSize: 14,
-                                                      color: Colors.white),
+                                            SizedBox(
+                                              width: double.infinity,
+                                              height: 128,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(
+                                                    8.0,
+                                                  ),
+                                                ),
+                                                child: Image.network(
+                                                  'https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Matt Villano',
-                                                  style: AppText.noticaBold
-                                                      .copyWith(
-                                                          fontSize: 12,
-                                                          color: Colors.white),
+                                            Container(
+                                              width: double.infinity,
+                                              height: 128,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(
+                                                    8.0,
+                                                  ),
                                                 ),
-                                                Text(
-                                                  'Sunday, 9 May 2021',
-                                                  style: AppText.noticaBold
-                                                      .copyWith(
-                                                          fontSize: 12,
-                                                          color: Colors.white),
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    const Color(0xFF626262)
+                                                        .withOpacity(0.35),
+                                                    const Color.fromARGB(
+                                                        0, 0, 0, 0)
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
                                                 ),
-                                              ],
-                                            )
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '5 things to know about the "conundrum" of lupus',
+                                                    style: AppText.noticaBold
+                                                        .copyWith(
+                                                            fontSize: 14,
+                                                            color:
+                                                                Colors.white),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        'Matt Villano',
+                                                        style: AppText
+                                                            .noticaBold
+                                                            .copyWith(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
+                                                      Text(
+                                                        'Sunday, 9 May 2021',
+                                                        style: AppText
+                                                            .noticaBold
+                                                            .copyWith(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              )),
+                                    )),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

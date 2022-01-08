@@ -4,4 +4,8 @@ import 'package:fpdart/fpdart.dart';
 
 abstract class INewsArticleRepository {
   Future<Either<NewsArticleFailure, NewsArticleResponse>> getNewsArticle();
+  Future<Either<NewsArticleFailure, NewsArticleResponse>>
+      getNewsArticleByCategory({
+    required String category,
+  });
 }
