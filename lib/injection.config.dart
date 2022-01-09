@@ -9,8 +9,10 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/news_article/news_article_bloc.dart' as _i6;
+import 'application/news_article_by_search/news_article_by_search_bloc.dart'
+    as _i7;
 import 'domain/news_article/i_news_article_repository.dart' as _i4;
-import 'infrastructure/core/core_register_module.dart' as _i7;
+import 'infrastructure/core/core_register_module.dart' as _i8;
 import 'infrastructure/news_article/news_article_repository.dart'
     as _i5; // ignore_for_file: unnecessary_lambdas
 
@@ -25,7 +27,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i5.NewsArticleRepository(get<_i3.Dio>()));
   gh.factory<_i6.NewsArticleBloc>(
       () => _i6.NewsArticleBloc(get<_i4.INewsArticleRepository>()));
+  gh.factory<_i7.NewsArticleBySearchBloc>(
+      () => _i7.NewsArticleBySearchBloc(get<_i4.INewsArticleRepository>()));
   return get;
 }
 
-class _$CoreRegisterModule extends _i7.CoreRegisterModule {}
+class _$CoreRegisterModule extends _i8.CoreRegisterModule {}

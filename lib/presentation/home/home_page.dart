@@ -1,6 +1,7 @@
 import 'package:flutter_boilprate_ddd/application/news_article/news_article_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilprate_ddd/application/news_article_by_search/news_article_by_search_bloc.dart';
 import 'package:flutter_boilprate_ddd/infrastructure/local_data_source/news_article_category_local.dart';
 import 'package:flutter_boilprate_ddd/injection.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
@@ -61,65 +62,51 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     children: [
-                      BlocProvider(
-                        create: (context) => getIt<NewsArticleBloc>(),
-                        child: Expanded(
-                          child: SizedBox(
-                            height: 32,
-                            child: TextField(
-                              textAlign: TextAlign.start,
-                              cursorColor: AppColors.colorFF3A44,
-                              style: AppText.nunitoSemiBold.copyWith(
-                                color: AppColors.color818181,
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () async {
+                            var selected = await showSearch(
+                              context: context,
+                              delegate: HomeSearchDelegatePage(
+                                BlocProvider.of<NewsArticleBySearchBloc>(
+                                    context),
                               ),
-                              onTap: () async {
-                                var selected = await showSearch(
-                                  context: context,
-                                  delegate: HomeSearchDelegatePage(
-                                    BlocProvider.of<NewsArticleBloc>(context),
+                            );
+                          },
+                          child: Container(
+                            height: 32,
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: AppColors.colorF0F1FA,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(
+                                  16,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Dogecoin to the Moon...',
+                                  style: AppText.nunitoSemiBold.copyWith(
+                                    color: AppColors.color818181,
                                   ),
-                                );
-
-                                print(selected);
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: const Icon(
+                                ),
+                                const Icon(
                                   Icons.search,
                                   size: 16,
                                   color: AppColors.color818181,
                                 ),
-                                contentPadding: const EdgeInsets.only(
-                                    top: 4, left: 16, right: 16),
-                                labelStyle: AppText.nunitoSemiBold.copyWith(
-                                  color: AppColors.color818181,
-                                ),
-                                hintText: 'Dogecoin to the Moon...',
-                                hintStyle: AppText.nunitoSemiBold.copyWith(
-                                  color: AppColors.color818181,
-                                ),
-                                enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppColors.colorF0F1FA,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                      16,
-                                    ),
-                                  ),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppColors.colorFF3A44,
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                      8,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
