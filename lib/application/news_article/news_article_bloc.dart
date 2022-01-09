@@ -30,7 +30,9 @@ class NewsArticleBloc extends Bloc<NewsArticleEvent, NewsArticleState> {
                 (l) => const NewsArticleState.loadFailure(
                   NewsArticleFailure.serverFailure(),
                 ),
-                (r) => NewsArticleState.getNewsArticleBySearchSuccess(r),
+                (r) {
+                  return NewsArticleState.getNewsArticleBySearchSuccess(r);
+                },
               ),
             );
           },
