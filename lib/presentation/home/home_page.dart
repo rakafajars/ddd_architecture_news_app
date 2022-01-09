@@ -182,8 +182,9 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             padding: const EdgeInsets.symmetric(
-                                                vertical: 10.0,
-                                                horizontal: 20.0),
+                                              vertical: 10.0,
+                                              horizontal: 20.0,
+                                            ),
                                             child: Text(
                                               _data?.title ?? "",
                                               style: const TextStyle(
@@ -273,80 +274,73 @@ class _HomePageState extends State<HomePage> {
 
                               return Column(
                                 children: List.generate(
-                                    _newsArticle?.length ?? 0,
-                                    (index) => Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8),
-                                          child: Container(
+                                  _newsArticle?.length ?? 0,
+                                  (index) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 128,
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          SizedBox(
                                             width: double.infinity,
                                             height: 128,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 15),
-                                            decoration: BoxDecoration(
+                                            child: ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                SizedBox(
-                                                  width: double.infinity,
-                                                  height: 128,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                      Radius.circular(
-                                                        8.0,
-                                                      ),
-                                                    ),
-                                                    child: Image.network(
-                                                      _newsArticle?[index]
-                                                              .img_url ??
-                                                          "",
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
+                                                  const BorderRadius.all(
+                                                Radius.circular(
+                                                  8.0,
                                                 ),
-                                                Container(
-                                                  width: double.infinity,
-                                                  height: 128,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                      Radius.circular(
-                                                        8.0,
-                                                      ),
-                                                    ),
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        const Color(0xFF626262)
-                                                            .withOpacity(0.35),
-                                                        const Color.fromARGB(
-                                                            0, 0, 0, 0)
-                                                      ],
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end: Alignment.topCenter,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    _newsArticle?[index]
-                                                            .title ??
-                                                        "",
-                                                    style: AppText.noticaBold
-                                                        .copyWith(
-                                                            fontSize: 14,
-                                                            color:
-                                                                Colors.white),
-                                                  ),
-                                                ),
-                                              ],
+                                              ),
+                                              child: Image.network(
+                                                _newsArticle?[index].img_url ??
+                                                    "",
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
-                                        )),
+                                          Positioned(
+                                            bottom: 0.0,
+                                            left: 0.0,
+                                            right: 0.0,
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        200, 0, 0, 0),
+                                                    Color.fromARGB(0, 0, 0, 0)
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                ),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: 10.0,
+                                                horizontal: 20.0,
+                                              ),
+                                              child: Text(
+                                                _newsArticle?[index].title ??
+                                                    "",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               );
                             }),
                       ],

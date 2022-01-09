@@ -9,4 +9,9 @@ abstract class INewsArticleRepository {
       getNewsArticleByCategory({
     required String category,
   });
+
+  Future<Either<NewsArticleFailure, NewsArticleResponse>>
+      getNewsArticleBySearch({
+    required String query,
+  });
 }

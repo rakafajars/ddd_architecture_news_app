@@ -18,12 +18,9 @@ class NewsArticleRepository implements INewsArticleRepository {
       final response = await _dio.get(
         'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-articles',
       );
-      print('${response.data}');
 
       return right(NewsArticleResponse.fromJson(response.data));
     } catch (e) {
-      print('${e.toString()}');
-
       return left(
         const NewsArticleFailure.serverFailure(),
       );
@@ -41,6 +38,24 @@ class NewsArticleRepository implements INewsArticleRepository {
       );
 
       return right(NewsArticleByCategoryResponse.fromJson(response.data));
+    } catch (e) {
+      return left(
+        const NewsArticleFailure.serverFailure(),
+      );
+    }
+  }
+
+  @override
+  Future<Either<NewsArticleFailure, NewsArticleResponse>>
+      getNewsArticleBySearch({
+    required String query,
+  }) async {
+    try {
+      final response = await _dio.get(
+        'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-search?query=$query',
+      );
+
+      return right(NewsArticleResponse.fromJson(response.data));
     } catch (e) {
       return left(
         const NewsArticleFailure.serverFailure(),

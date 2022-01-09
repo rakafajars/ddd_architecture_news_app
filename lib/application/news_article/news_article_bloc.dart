@@ -18,6 +18,22 @@ class NewsArticleBloc extends Bloc<NewsArticleEvent, NewsArticleState> {
     on<NewsArticleEvent>(
       (event, emit) async {
         await event.map(
+          getNewsArticleBySearch: (request) async {
+            emit(const NewsArticleState.loadInProgress());
+            final getNewsArticleByCategory =
+                await _iNewsArticleRepository.getNewsArticleBySearch(
+              query: request.query,
+            );
+
+            emit(
+              getNewsArticleByCategory.fold(
+                (l) => const NewsArticleState.loadFailure(
+                  NewsArticleFailure.serverFailure(),
+                ),
+                (r) => NewsArticleState.getNewsArticleBySearchSuccess(r),
+              ),
+            );
+          },
           getNewsArticle: (e) async {
             emit(const NewsArticleState.loadInProgress());
             final getNewsArticle =
