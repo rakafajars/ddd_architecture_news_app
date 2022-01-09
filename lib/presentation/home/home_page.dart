@@ -131,180 +131,50 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 24),
 
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Text(
-                            'Headline',
-                            style: AppText.noticaBold,
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<NewsArticleBloc>().add(
+                            NewsArticleEvent.getNewsArticleByCategory(
+                              category: idCategory!,
+                            ),
+                          );
+                    },
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Text(
+                              'Headline',
+                              style: AppText.noticaBold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 16),
+                          const SizedBox(height: 16),
 
-                        /// Slider
-                        state.maybeMap(
-                            orElse: () => Container(),
-                            loadInProgress: (_) => const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                            getNewsArticleByCategorySuccess: (data) {
-                              var _data = data.response.data?.headline;
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(
-                                        8.0,
-                                      ),
-                                    ),
-                                    child: Stack(
-                                      children: <Widget>[
-                                        Image.network(
-                                          _data?.img_url ?? "",
-                                          fit: BoxFit.cover,
-                                          width: 1000.0,
-                                        ),
-                                        Positioned(
-                                          bottom: 0.0,
-                                          left: 0.0,
-                                          right: 0.0,
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Color.fromARGB(200, 0, 0, 0),
-                                                  Color.fromARGB(0, 0, 0, 0)
-                                                ],
-                                                begin: Alignment.bottomCenter,
-                                                end: Alignment.topCenter,
-                                              ),
-                                            ),
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 10.0,
-                                              horizontal: 20.0,
-                                            ),
-                                            child: Text(
-                                              _data?.title ?? "",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                              );
-                            }),
-                        const SizedBox(height: 24),
-
-                        /// TabBar
-                        SizedBox(
-                          height: 32,
-                          width: double.infinity,
-                          child: ListView.builder(
-                            padding: const EdgeInsets.only(left: 15),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: titleNews.length,
-                            itemBuilder: (context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectCategoryIndex = index;
-                                      idCategory = titleNews[index].id!;
-                                      context.read<NewsArticleBloc>().add(
-                                            NewsArticleEvent
-                                                .getNewsArticleByCategory(
-                                              category: idCategory!,
-                                            ),
-                                          );
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 32,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 8,
-                                    ),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: index == _selectCategoryIndex
-                                          ? AppColors.colorFF3A44
-                                          : Colors.white,
-                                      border: Border.all(
-                                        width: 1,
-                                        color: AppColors.colorF0F1FA,
-                                      ),
+                          /// Slider
+                          state.maybeMap(
+                              orElse: () => Container(),
+                              loadInProgress: (_) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                              getNewsArticleByCategorySuccess: (data) {
+                                var _data = data.response.data?.headline;
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 15),
+                                  child: ClipRRect(
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(
-                                          16,
+                                          8.0,
                                         ),
                                       ),
-                                    ),
-                                    child: Text(
-                                      titleNews[index].name ?? "-",
-                                      style: AppText.nunitoSemiBold.copyWith(
-                                        color: index == _selectCategoryIndex
-                                            ? Colors.white
-                                            : AppColors.color2E0505,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        /// Content TabBar
-                        state.maybeMap(
-                            orElse: () => Container(),
-                            loadInProgress: (_) => const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                            getNewsArticleByCategorySuccess: (data) {
-                              var _newsArticle = data.response.data?.news;
-
-                              return Column(
-                                children: List.generate(
-                                  _newsArticle?.length ?? 0,
-                                  (index) => Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 128,
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 15),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
                                       child: Stack(
-                                        children: [
-                                          SizedBox(
-                                            width: double.infinity,
-                                            height: 128,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(
-                                                  8.0,
-                                                ),
-                                              ),
-                                              child: Image.network(
-                                                _newsArticle?[index].img_url ??
-                                                    "",
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
+                                        children: <Widget>[
+                                          Image.network(
+                                            _data?.img_url ?? "",
+                                            fit: BoxFit.cover,
+                                            width: 1000.0,
                                           ),
                                           Positioned(
                                             bottom: 0.0,
@@ -328,24 +198,168 @@ class _HomePageState extends State<HomePage> {
                                                 horizontal: 20.0,
                                               ),
                                               child: Text(
-                                                _newsArticle?[index].title ??
-                                                    "",
+                                                _data?.title ?? "",
                                                 style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16.0,
+                                                  fontSize: 20.0,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ],
+                                      )),
+                                );
+                              }),
+                          const SizedBox(height: 24),
+
+                          /// TabBar
+                          SizedBox(
+                            height: 32,
+                            width: double.infinity,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.only(left: 15),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: titleNews.length,
+                              itemBuilder: (context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _selectCategoryIndex = index;
+                                        idCategory = titleNews[index].id!;
+                                        context.read<NewsArticleBloc>().add(
+                                              NewsArticleEvent
+                                                  .getNewsArticleByCategory(
+                                                category: idCategory!,
+                                              ),
+                                            );
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 32,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 8,
+                                      ),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: index == _selectCategoryIndex
+                                            ? AppColors.colorFF3A44
+                                            : Colors.white,
+                                        border: Border.all(
+                                          width: 1,
+                                          color: AppColors.colorF0F1FA,
+                                        ),
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(
+                                            16,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        titleNews[index].name ?? "-",
+                                        style: AppText.nunitoSemiBold.copyWith(
+                                          color: index == _selectCategoryIndex
+                                              ? Colors.white
+                                              : AppColors.color2E0505,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }),
-                      ],
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+
+                          /// Content TabBar
+                          state.maybeMap(
+                              orElse: () => Container(),
+                              loadInProgress: (_) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                              getNewsArticleByCategorySuccess: (data) {
+                                var _newsArticle = data.response.data?.news;
+
+                                return Column(
+                                  children: List.generate(
+                                    _newsArticle?.length ?? 0,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 128,
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            SizedBox(
+                                              width: double.infinity,
+                                              height: 128,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(
+                                                    8.0,
+                                                  ),
+                                                ),
+                                                child: Image.network(
+                                                  _newsArticle?[index]
+                                                          .img_url ??
+                                                      "",
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              bottom: 0.0,
+                                              left: 0.0,
+                                              right: 0.0,
+                                              child: Container(
+                                                decoration: const BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Color.fromARGB(
+                                                          200, 0, 0, 0),
+                                                      Color.fromARGB(0, 0, 0, 0)
+                                                    ],
+                                                    begin:
+                                                        Alignment.bottomCenter,
+                                                    end: Alignment.topCenter,
+                                                  ),
+                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  vertical: 10.0,
+                                                  horizontal: 20.0,
+                                                ),
+                                                child: Text(
+                                                  _newsArticle?[index].title ??
+                                                      "",
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ],
+                      ),
                     ),
                   ),
                 ),
