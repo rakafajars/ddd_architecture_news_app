@@ -28,13 +28,9 @@ class NewsArticleBySearchBloc
 
             emit(
               getNewsArticleByCategory.fold(
-                (l) => const NewsArticleBySearchState.loadFailure(
-                  NewsArticleFailure.serverFailure(),
-                ),
-                (r) {
-                  return NewsArticleBySearchState.getNewsArticleBySearchSuccess(
-                      r);
-                },
+                (error) => NewsArticleBySearchState.loadFailure(error),
+                (r) =>
+                    NewsArticleBySearchState.getNewsArticleBySearchSuccess(r),
               ),
             );
           },

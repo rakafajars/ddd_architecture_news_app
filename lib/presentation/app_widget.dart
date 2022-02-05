@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/application/news_article_by_search/news_article_by_search_bloc.dart';
 import 'package:flutter_boilprate_ddd/injection.dart';
-import 'package:flutter_boilprate_ddd/presentation/home/home_bottom_navigaton_page.dart';
+import 'package:flutter_boilprate_ddd/presentation/home_bottom_navigaton_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter_boilprate_ddd/application/news_article/news_article_bloc.dart';
 

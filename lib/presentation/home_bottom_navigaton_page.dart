@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilprate_ddd/presentation/home/home_page.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/article_page.dart';
+import 'package:flutter_boilprate_ddd/presentation/setting/setting_page.dart';
 
 class HomeBottomNavigatonPage extends StatefulWidget {
   const HomeBottomNavigatonPage({Key? key}) : super(key: key);
@@ -13,8 +14,8 @@ class _HomeBottomNavigatonPageState extends State<HomeBottomNavigatonPage> {
   int _selectedIndex = 0; //New
 
   final List<Widget> _mainPage = <Widget>[
-    const HomePage(),
-    Container(),
+    const ArticlePage(),
+    const SettingPage(),
   ];
 
   @override
@@ -27,11 +28,11 @@ class _HomeBottomNavigatonPageState extends State<HomeBottomNavigatonPage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Beranda',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Setting',
+            label: 'Pengaturan',
           ),
         ],
       ),

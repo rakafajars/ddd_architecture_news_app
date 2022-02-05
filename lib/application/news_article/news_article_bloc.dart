@@ -27,9 +27,7 @@ class NewsArticleBloc extends Bloc<NewsArticleEvent, NewsArticleState> {
 
             emit(
               getNewsArticleByCategory.fold(
-                (l) => const NewsArticleState.loadFailure(
-                  NewsArticleFailure.serverFailure(),
-                ),
+                (error) => NewsArticleState.loadFailure(error),
                 (r) {
                   return NewsArticleState.getNewsArticleBySearchSuccess(r);
                 },
@@ -43,8 +41,8 @@ class NewsArticleBloc extends Bloc<NewsArticleEvent, NewsArticleState> {
 
             emit(
               getNewsArticle.fold(
-                (l) => const NewsArticleState.loadFailure(
-                  NewsArticleFailure.serverFailure(),
+                (error) => NewsArticleState.loadFailure(
+                  error,
                 ),
                 (r) => NewsArticleState.getNewsArticleSuccess(r),
               ),
@@ -59,9 +57,7 @@ class NewsArticleBloc extends Bloc<NewsArticleEvent, NewsArticleState> {
 
             emit(
               getNewsArticleByCategory.fold(
-                (l) => const NewsArticleState.loadFailure(
-                  NewsArticleFailure.serverFailure(),
-                ),
+                (error) => NewsArticleState.loadFailure(error),
                 (r) => NewsArticleState.getNewsArticleByCategorySuccess(r),
               ),
             );

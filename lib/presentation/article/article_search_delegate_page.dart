@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/application/news_article_by_search/news_article_by_search_bloc.dart';
-import 'package:flutter_boilprate_ddd/injection.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/article_detail_page.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
+import 'package:get/get.dart';
 
-class HomeSearchDelegatePage extends SearchDelegate {
+class ArticleSearchDelegatePage extends SearchDelegate {
   final Bloc<NewsArticleBySearchEvent, NewsArticleBySearchState> newsBloc;
 
-  HomeSearchDelegatePage(this.newsBloc);
+  ArticleSearchDelegatePage(this.newsBloc);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -130,71 +131,81 @@ class HomeSearchDelegatePage extends SearchDelegate {
 
                       return Padding(
                         padding: const EdgeInsets.all(15),
-                        child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(
-                                8.0,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(
+                              InitialArticleDetailPage(
+                                url: _data?.url ?? "",
+                                imageUrl: _data?.img_url ?? "",
                               ),
-                            ),
-                            child: Stack(
-                              children: <Widget>[
-                                Image.network(
-                                  _data?.img_url ?? "",
-                                  fit: BoxFit.cover,
-                                  width: 1000.0,
+                            );
+                          },
+                          child: ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(
+                                  8.0,
                                 ),
-                                Positioned(
-                                  top: 0.0,
-                                  left: 0.0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      color: Colors.amber,
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0,
-                                      horizontal: 20.0,
-                                    ),
-                                    child: Text(
-                                      _data?.label ?? "",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold,
+                              ),
+                              child: Stack(
+                                children: <Widget>[
+                                  Image.network(
+                                    _data?.img_url ?? "",
+                                    fit: BoxFit.cover,
+                                    width: 1000.0,
+                                  ),
+                                  Positioned(
+                                    top: 0.0,
+                                    left: 0.0,
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: Colors.amber,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0,
+                                        horizontal: 20.0,
+                                      ),
+                                      child: Text(
+                                        _data?.label ?? "",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Positioned(
-                                  bottom: 0.0,
-                                  left: 0.0,
-                                  right: 0.0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Color.fromARGB(200, 0, 0, 0),
-                                          Color.fromARGB(0, 0, 0, 0)
-                                        ],
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
+                                  Positioned(
+                                    bottom: 0.0,
+                                    left: 0.0,
+                                    right: 0.0,
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Color.fromARGB(200, 0, 0, 0),
+                                            Color.fromARGB(0, 0, 0, 0)
+                                          ],
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                        ),
                                       ),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0,
-                                      horizontal: 20.0,
-                                    ),
-                                    child: Text(
-                                      _data?.title ?? "",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0,
+                                        horizontal: 20.0,
+                                      ),
+                                      child: Text(
+                                        _data?.title ?? "",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                ],
+                              )),
+                        ),
                       );
                     },
                   );

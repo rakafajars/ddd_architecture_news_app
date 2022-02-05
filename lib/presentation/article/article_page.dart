@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/application/news_article_by_search/news_article_by_search_bloc.dart';
 import 'package:flutter_boilprate_ddd/infrastructure/local_data_source/news_article_category_local.dart';
-import 'package:flutter_boilprate_ddd/injection.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/article_detail_page.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/article_search_delegate_page.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
-import 'package:flutter_boilprate_ddd/presentation/home/home_search_delegate_page.dart';
+import 'package:get/get.dart';
 
 final List<NewsArticleCategoryLocal> titleNews = [
   const NewsArticleCategoryLocal(id: 'market', name: 'Market'),
@@ -25,14 +26,14 @@ final List<String> imgList = [
   "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
 ];
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ArticlePage extends StatefulWidget {
+  const ArticlePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ArticlePage> createState() => _ArticlePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ArticlePageState extends State<ArticlePage> {
   int _selectCategoryIndex = 0;
   String? idCategory = titleNews.first.id;
 
@@ -67,11 +68,14 @@ class _HomePageState extends State<HomePage> {
                           onTap: () async {
                             var selected = await showSearch(
                               context: context,
-                              delegate: HomeSearchDelegatePage(
+                              delegate: ArticleSearchDelegatePage(
                                 BlocProvider.of<NewsArticleBySearchBloc>(
-                                    context),
+                                  context,
+                                ),
                               ),
                             );
+                            // ignore: avoid_print
+                            print(selected);
                           },
                           child: Container(
                             height: 32,
@@ -160,55 +164,68 @@ class _HomePageState extends State<HomePage> {
                                   ),
                               getNewsArticleByCategorySuccess: (data) {
                                 var _data = data.response.data?.headline;
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 15),
-                                  child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(
-                                          8.0,
-                                        ),
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(
+                                      InitialArticleDetailPage(
+                                        url: _data?.url ?? "",
+                                        imageUrl: _data?.img_url ?? "",
                                       ),
-                                      child: Stack(
-                                        children: <Widget>[
-                                          Image.network(
-                                            _data?.img_url ?? "",
-                                            fit: BoxFit.cover,
-                                            width: 1000.0,
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 15,
+                                      right: 15,
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(
+                                            8.0,
                                           ),
-                                          Positioned(
-                                            bottom: 0.0,
-                                            left: 0.0,
-                                            right: 0.0,
-                                            child: Container(
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    Color.fromARGB(
-                                                        200, 0, 0, 0),
-                                                    Color.fromARGB(0, 0, 0, 0)
-                                                  ],
-                                                  begin: Alignment.bottomCenter,
-                                                  end: Alignment.topCenter,
+                                        ),
+                                        child: Stack(
+                                          children: <Widget>[
+                                            Image.network(
+                                              _data?.img_url ?? "",
+                                              fit: BoxFit.cover,
+                                              width: 1000.0,
+                                            ),
+                                            Positioned(
+                                              bottom: 0.0,
+                                              left: 0.0,
+                                              right: 0.0,
+                                              child: Container(
+                                                decoration: const BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Color.fromARGB(
+                                                          200, 0, 0, 0),
+                                                      Color.fromARGB(0, 0, 0, 0)
+                                                    ],
+                                                    begin:
+                                                        Alignment.bottomCenter,
+                                                    end: Alignment.topCenter,
+                                                  ),
                                                 ),
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 10.0,
-                                                horizontal: 20.0,
-                                              ),
-                                              child: Text(
-                                                _data?.title ?? "",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.bold,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  vertical: 10.0,
+                                                  horizontal: 20.0,
+                                                ),
+                                                child: Text(
+                                                  _data?.title ?? "",
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      )),
+                                          ],
+                                        )),
+                                  ),
                                 );
                               }),
                           const SizedBox(height: 24),
@@ -287,71 +304,88 @@ class _HomePageState extends State<HomePage> {
                                 return Column(
                                   children: List.generate(
                                     _newsArticle?.length ?? 0,
-                                    (index) => Padding(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 128,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            SizedBox(
-                                              width: double.infinity,
-                                              height: 128,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                  Radius.circular(
-                                                    8.0,
+                                    (index) => GestureDetector(
+                                      onTap: () {
+                                        Get.to(
+                                          InitialArticleDetailPage(
+                                            url: _newsArticle?[index].url ?? "",
+                                            imageUrl:
+                                                _newsArticle?[index].img_url ??
+                                                    "",
+                                          ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 128,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Stack(
+                                            children: [
+                                              SizedBox(
+                                                width: double.infinity,
+                                                height: 128,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                    Radius.circular(
+                                                      8.0,
+                                                    ),
                                                   ),
-                                                ),
-                                                child: Image.network(
-                                                  _newsArticle?[index]
-                                                          .img_url ??
-                                                      "",
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              bottom: 0.0,
-                                              left: 0.0,
-                                              right: 0.0,
-                                              child: Container(
-                                                decoration: const BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Color.fromARGB(
-                                                          200, 0, 0, 0),
-                                                      Color.fromARGB(0, 0, 0, 0)
-                                                    ],
-                                                    begin:
-                                                        Alignment.bottomCenter,
-                                                    end: Alignment.topCenter,
-                                                  ),
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 10.0,
-                                                  horizontal: 20.0,
-                                                ),
-                                                child: Text(
-                                                  _newsArticle?[index].title ??
-                                                      "",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16.0,
-                                                    fontWeight: FontWeight.bold,
+                                                  child: Image.network(
+                                                    _newsArticle?[index]
+                                                            .img_url ??
+                                                        "",
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Positioned(
+                                                bottom: 0.0,
+                                                left: 0.0,
+                                                right: 0.0,
+                                                child: Container(
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Color.fromARGB(
+                                                            200, 0, 0, 0),
+                                                        Color.fromARGB(
+                                                            0, 0, 0, 0)
+                                                      ],
+                                                      begin: Alignment
+                                                          .bottomCenter,
+                                                      end: Alignment.topCenter,
+                                                    ),
+                                                  ),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    vertical: 10.0,
+                                                    horizontal: 20.0,
+                                                  ),
+                                                  child: Text(
+                                                    _newsArticle?[index]
+                                                            .title ??
+                                                        "",
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
