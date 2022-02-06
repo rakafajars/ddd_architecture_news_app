@@ -5,6 +5,8 @@ import 'package:flutter_boilprate_ddd/application/news_article_by_search/news_ar
 import 'package:flutter_boilprate_ddd/infrastructure/local_data_source/news_article_category_local.dart';
 import 'package:flutter_boilprate_ddd/presentation/article/article_detail_page.dart';
 import 'package:flutter_boilprate_ddd/presentation/article/article_search_delegate_page.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/widget/loading_banner_article.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/widget/loading_list_banner_article.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -160,26 +162,8 @@ class _ArticlePageState extends State<ArticlePage> {
                           /// Slider
                           state.maybeMap(
                               orElse: () => Container(),
-                              loadInProgress: (_) => Shimmer.fromColors(
-                                    baseColor: Colors.grey[300]!,
-                                    highlightColor: Colors.grey[100]!,
-                                    child: Container(
-                                      height: 240,
-                                      width: double.infinity,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                            8.0,
-                                          ),
-                                        ),
-                                      ),
-                                      margin: const EdgeInsets.only(
-                                        left: 15,
-                                        right: 15,
-                                      ),
-                                    ),
-                                  ),
+                              loadInProgress: (_) =>
+                                  const LoadingBannerArticle(),
                               loadFailure: (e) {
                                 return Center(
                                   child: Text(
@@ -329,31 +313,6 @@ class _ArticlePageState extends State<ArticlePage> {
                           /// Content TabBar
                           state.maybeMap(
                               orElse: () => Container(),
-                              loadInProgress: (_) => Shimmer.fromColors(
-                                    baseColor: Colors.grey[300]!,
-                                    highlightColor: Colors.grey[100]!,
-                                    child: Column(
-                                      children: List.generate(
-                                        10,
-                                        (index) => Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8),
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 128,
-                                            margin: const EdgeInsets.symmetric(
-                                              horizontal: 15,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                               loadFailure: (e) {
                                 return Center(
                                   child: Text(
@@ -366,6 +325,8 @@ class _ArticlePageState extends State<ArticlePage> {
                                   ),
                                 );
                               },
+                              loadInProgress: (_) =>
+                                  const LoadingListBannerArticle(),
                               getNewsArticleByCategorySuccess: (data) {
                                 var _newsArticle = data.response.data?.news;
 

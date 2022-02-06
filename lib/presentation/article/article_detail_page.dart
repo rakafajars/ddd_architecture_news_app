@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/application/news_article_detail/news_article_detail_bloc.dart';
 import 'package:flutter_boilprate_ddd/injection.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/widget/loading_detail_article.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class InitialArticleDetailPage extends StatelessWidget {
   final String? url;
@@ -50,9 +52,6 @@ class ArticleDetailPage extends StatelessWidget {
         builder: (context, state) {
           return state.maybeMap(
             orElse: () => Container(),
-            loading: (_) => const Center(
-              child: CircularProgressIndicator(),
-            ),
             loadFailure: (e) {
               return e.e.maybeMap(
                 orElse: () => Container(),
@@ -75,6 +74,7 @@ class ArticleDetailPage extends StatelessWidget {
                 ),
               );
             },
+            loading: (_) => const LoadingDetailArticle(),
             getNewsArticleDetailSuccess: (data) {
               var _data = data.newsArticleDetailResponse?.data;
               return Stack(
@@ -118,7 +118,7 @@ class ArticleDetailPage extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(
-                      top: 320,
+                      top: 310,
                     ),
                     padding: const EdgeInsets.only(
                       left: 15,

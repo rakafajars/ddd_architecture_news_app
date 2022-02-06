@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/application/news_article_by_search/news_article_by_search_bloc.dart';
 import 'package:flutter_boilprate_ddd/presentation/article/article_detail_page.dart';
+import 'package:flutter_boilprate_ddd/presentation/article/widget/loading_list_search_article.dart';
 import 'package:flutter_boilprate_ddd/presentation/core/theme.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -88,27 +89,7 @@ class ArticleSearchDelegatePage extends SearchDelegate {
       builder: (context, state) {
         return newsBloc.state.maybeMap(
           orElse: () => Container(),
-          loadInProgress: (_) => Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: ListView.builder(
-              itemCount: 5,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Container(
-                    width: double.infinity,
-                    height: 240,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          loadInProgress: (_) => const LoadingListSearchArticle(),
           loadFailure: (e) {
             return Center(
               child: Text(
