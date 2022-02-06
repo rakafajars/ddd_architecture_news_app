@@ -101,6 +101,17 @@ class ArticleSearchDelegatePage extends SearchDelegate {
           loadInProgress: (_) => const Center(
             child: CircularProgressIndicator(),
           ),
+          loadFailure: (e) {
+            return Center(
+              child: Text(
+                e.e.map(
+                  unexpected: (_) => "Unexpected",
+                  serverFailure: (_) => "Server Failure",
+                  noConnectionFailure: (_) => "No Connection Failure",
+                ),
+              ),
+            );
+          },
           getNewsArticleBySearchSuccess: (data) {
             return data.response.data!.news!.isEmpty
                 ? Center(

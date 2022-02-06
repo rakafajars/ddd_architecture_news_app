@@ -8,10 +8,6 @@ import 'package:injectable/injectable.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.dev);
-  // ignore: prefer_const_constructors
-  // runApp(
-  //   AppWidget(),
-  // );
 
   BlocOverrides.runZoned(
     () {

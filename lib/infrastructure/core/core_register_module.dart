@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
@@ -18,4 +19,7 @@ abstract class CoreRegisterModule {
           printTime: false,
         ),
       );
+
+  @lazySingleton
+  Connectivity get connectivity => Connectivity();
 }

@@ -53,6 +53,28 @@ class ArticleDetailPage extends StatelessWidget {
             loading: (_) => const Center(
               child: CircularProgressIndicator(),
             ),
+            loadFailure: (e) {
+              return e.e.maybeMap(
+                orElse: () => Container(),
+                unexpected: (_) => const Center(
+                  child: Text("Unexpected"),
+                ),
+                serverFailure: (_) => const Center(
+                  child: Text("Server Failure"),
+                ),
+                noConnectionFailure: (_) => AlertDialog(
+                  title: const Text('No Connection'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
+            },
             getNewsArticleDetailSuccess: (data) {
               var _data = data.newsArticleDetailResponse?.data;
               return Stack(

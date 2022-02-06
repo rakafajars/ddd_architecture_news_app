@@ -752,8 +752,6 @@ abstract class _$GetNewsArticleDetailSuccessCopyWith<$Res> {
           $Res Function(_GetNewsArticleDetailSuccess) then) =
       __$GetNewsArticleDetailSuccessCopyWithImpl<$Res>;
   $Res call({NewsArticleDetailResponse? newsArticleDetailResponse});
-
-  $NewsArticleDetailResponseCopyWith<$Res>? get newsArticleDetailResponse;
 }
 
 /// @nodoc
@@ -779,18 +777,6 @@ class __$GetNewsArticleDetailSuccessCopyWithImpl<$Res>
           : newsArticleDetailResponse // ignore: cast_nullable_to_non_nullable
               as NewsArticleDetailResponse?,
     ));
-  }
-
-  @override
-  $NewsArticleDetailResponseCopyWith<$Res>? get newsArticleDetailResponse {
-    if (_value.newsArticleDetailResponse == null) {
-      return null;
-    }
-
-    return $NewsArticleDetailResponseCopyWith<$Res>(
-        _value.newsArticleDetailResponse!, (value) {
-      return _then(_value.copyWith(newsArticleDetailResponse: value));
-    });
   }
 }
 

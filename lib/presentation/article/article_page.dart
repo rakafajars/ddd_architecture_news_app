@@ -162,6 +162,18 @@ class _ArticlePageState extends State<ArticlePage> {
                               loadInProgress: (_) => const Center(
                                     child: CircularProgressIndicator(),
                                   ),
+                              loadFailure: (e) {
+                                return Center(
+                                  child: Text(
+                                    e.e.map(
+                                      unexpected: (_) => "Unexpected",
+                                      serverFailure: (_) => "Server Failure",
+                                      noConnectionFailure: (_) =>
+                                          "No Connection Failure",
+                                    ),
+                                  ),
+                                );
+                              },
                               getNewsArticleByCategorySuccess: (data) {
                                 var _data = data.response.data?.headline;
                                 return GestureDetector(
@@ -298,6 +310,18 @@ class _ArticlePageState extends State<ArticlePage> {
                               loadInProgress: (_) => const Center(
                                     child: CircularProgressIndicator(),
                                   ),
+                              loadFailure: (e) {
+                                return Center(
+                                  child: Text(
+                                    e.e.map(
+                                      unexpected: (_) => "Unexpected",
+                                      serverFailure: (_) => "Server Failure",
+                                      noConnectionFailure: (_) =>
+                                          "No Connection Failure",
+                                    ),
+                                  ),
+                                );
+                              },
                               getNewsArticleByCategorySuccess: (data) {
                                 var _newsArticle = data.response.data?.news;
 
