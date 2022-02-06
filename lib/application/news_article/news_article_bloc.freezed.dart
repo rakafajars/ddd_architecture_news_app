@@ -1116,6 +1116,8 @@ abstract class _$GetNewsArticleSuccessCopyWith<$Res> {
           $Res Function(_GetNewsArticleSuccess) then) =
       __$GetNewsArticleSuccessCopyWithImpl<$Res>;
   $Res call({NewsArticleResponse response});
+
+  $NewsArticleResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -1139,6 +1141,13 @@ class __$GetNewsArticleSuccessCopyWithImpl<$Res>
           : response // ignore: cast_nullable_to_non_nullable
               as NewsArticleResponse,
     ));
+  }
+
+  @override
+  $NewsArticleResponseCopyWith<$Res> get response {
+    return $NewsArticleResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value));
+    });
   }
 }
 
@@ -1291,6 +1300,8 @@ abstract class _$GetNewsArticleByCategorySuccessCopyWith<$Res> {
           $Res Function(_GetNewsArticleByCategorySuccess) then) =
       __$GetNewsArticleByCategorySuccessCopyWithImpl<$Res>;
   $Res call({NewsArticleByCategoryResponse response});
+
+  $NewsArticleByCategoryResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -1316,6 +1327,14 @@ class __$GetNewsArticleByCategorySuccessCopyWithImpl<$Res>
           : response // ignore: cast_nullable_to_non_nullable
               as NewsArticleByCategoryResponse,
     ));
+  }
+
+  @override
+  $NewsArticleByCategoryResponseCopyWith<$Res> get response {
+    return $NewsArticleByCategoryResponseCopyWith<$Res>(_value.response,
+        (value) {
+      return _then(_value.copyWith(response: value));
+    });
   }
 }
 
@@ -1470,6 +1489,8 @@ abstract class _$GetNewsArticleBySearchSuccessCopyWith<$Res> {
           $Res Function(_GetNewsArticleBySearchSuccess) then) =
       __$GetNewsArticleBySearchSuccessCopyWithImpl<$Res>;
   $Res call({NewsArticleResponse response});
+
+  $NewsArticleResponseCopyWith<$Res> get response;
 }
 
 /// @nodoc
@@ -1495,6 +1516,13 @@ class __$GetNewsArticleBySearchSuccessCopyWithImpl<$Res>
           : response // ignore: cast_nullable_to_non_nullable
               as NewsArticleResponse,
     ));
+  }
+
+  @override
+  $NewsArticleResponseCopyWith<$Res> get response {
+    return $NewsArticleResponseCopyWith<$Res>(_value.response, (value) {
+      return _then(_value.copyWith(response: value));
+    });
   }
 }
 

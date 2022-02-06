@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilprate_ddd/injection.dart';
@@ -12,7 +13,9 @@ void main() async {
   BlocOverrides.runZoned(
     () {
       runApp(
-        const AppWidget(),
+        AppWidget(
+          alice: getIt<Alice>(),
+        ),
       );
     },
     blocObserver: getIt<SimpleBlocObserver>(),

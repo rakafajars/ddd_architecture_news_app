@@ -23,7 +23,7 @@ class NewsArticleRepository implements INewsArticleRepository {
     if (await network.isConnceted == true) {
       try {
         final response = await _dio.get(
-          'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-articles',
+          'cnbc-news-articles',
         );
         logger.d(response);
         return right(NewsArticleResponse.fromJson(response.data));
@@ -53,7 +53,7 @@ class NewsArticleRepository implements INewsArticleRepository {
     if (await network.isConnceted == true) {
       try {
         final response = await _dio.get(
-          'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-articles?category=$category',
+          'cnbc-news-articles?category=$category',
         );
         logger.d(response);
 
@@ -83,7 +83,7 @@ class NewsArticleRepository implements INewsArticleRepository {
   }) async {
     try {
       final response = await _dio.get(
-        'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-search?query=$query',
+        'cnbc-news-search?query=$query',
       );
       logger.d(response);
 
@@ -101,7 +101,7 @@ class NewsArticleRepository implements INewsArticleRepository {
     if (await network.isConnceted == true) {
       try {
         final response = await _dio.get(
-          'https://flask-scraping-cncbind.herokuapp.com/api/v1/cnbc-news-detail?url=$url',
+          'cnbc-news-detail?url=$url',
         );
         logger.d(response);
 
