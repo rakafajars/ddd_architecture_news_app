@@ -8,5 +8,14 @@ class NewsArticleState with _$NewsArticleState {
       _LoadFailure;
 
   const factory NewsArticleState.getNewsArticleSuccess(
-      NewsArticleResponse response) = _GetNewsArticleSuccess;
+    NewsArticleResponse response,
+  ) = _GetNewsArticleSuccess;
+
+  const factory NewsArticleState.getNewsArticleByCategorySuccess(
+    NewsArticleByCategoryResponse response,
+  ) = _GetNewsArticleByCategorySuccess;
+
+  const factory NewsArticleState.getNewsArticleBySearchSuccess(
+    NewsArticleResponse response,
+  ) = _GetNewsArticleBySearchSuccess;
 }
